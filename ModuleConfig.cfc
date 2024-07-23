@@ -6,7 +6,7 @@
 component {
 
 	// Module Properties
-	this.title       = "cbPayments";
+	this.title       = "cbpayments";
 	this.author      = "Ortus Solutions";
 	this.webURL      = "https://www.ortussolutions.com";
 	this.description = "A module providing a common interface and API for processing payments and subscriptions'";

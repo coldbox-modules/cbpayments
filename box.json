@@ -1,5 +1,5 @@
 {
-    "name":"cbPayments",
+    "name":"cbpayments",
     "version":"1.0.0",
     "location":"https://downloads.ortussolutions.com/ortussolutions/coldbox-modules/cbpayments/@build.version@/cbpayments-@build.version@.zip",
     "author":"Ortus Solutions <info@ortussolutions.com>",

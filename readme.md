@@ -1,3 +1,3 @@
-`cbPayments` - The Coldbox Payments and Subscription Processing Module
+`cbpayments` - The Coldbox Payments and Subscription Processing Module
 
 

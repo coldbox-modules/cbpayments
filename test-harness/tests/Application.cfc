@@ -6,9 +6,9 @@
 component {
 
 	// The name of the module used in cfmappings ,etc
-	request.MODULE_NAME = "cbPayments";
+	request.MODULE_NAME = "cbpayments";
 	// The directory name of the module on disk. Usually, it's the same as the module name
-	request.MODULE_PATH = "cbPayments";
+	request.MODULE_PATH = "cbpayments";
 
 	// APPLICATION CFC PROPERTIES
 	this.name                 = "#request.MODULE_NAME# Testing Suite";

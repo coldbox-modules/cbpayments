@@ -1,5 +1,5 @@
 {
-    "name":"cbPayments-lucee@6",
+    "name":"cbpayments-lucee@6",
     "app":{
         "serverHomeDirectory":".engine/lucee6",
         "cfengine":"lucee@6"
@@ -13,7 +13,7 @@
         },
 		"webroot": "test-harness",
 		"aliases":{
-            "/moduleroot/cbPayments":"../"
+            "/moduleroot/cbpayments":"../"
         }
     },
     "openBrowser":"false",

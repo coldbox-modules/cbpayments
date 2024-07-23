@@ -39,7 +39,7 @@ component {
 		command( "tokenReplace" )
 			.params(
 				path        = "/#variables.cwd#/**",
-				token       = "cbPayments",
+				token       = "cbpayments",
 				replacement = moduleName
 			)
 			.run();

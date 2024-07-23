@@ -1,5 +1,5 @@
 {
-    "name":"cbPayments-adobe@2021",
+    "name":"cbpayments-adobe@2021",
     "app":{
         "serverHomeDirectory":".engine/adobe2021",
         "cfengine":"adobe@2021"
@@ -13,7 +13,7 @@
         },
 		"webroot": "test-harness",
 		"aliases":{
-            "/moduleroot/cbPayments":"../"
+            "/moduleroot/cbpayments":"../"
         }
     },
     "jvm":{

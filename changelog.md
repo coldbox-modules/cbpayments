@@ -9,6 +9,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.0.0] => 2021-JAN-01
+## [1.0.0] => 2024-JUL-23
 
 * First iteration of this module

@@ -48,6 +48,12 @@
 			exclude = []
 		};
 
+		moduleSettings = {
+			"stripecfml" : {
+				"apiKey" : getSystemSetting( "STRIPE_API_KEY", "" )
+			}
+		}
+
 		//Register interceptors as an array, we need order
 		interceptors = [
 		];

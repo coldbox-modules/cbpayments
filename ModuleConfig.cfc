@@ -6,42 +6,38 @@
 component {
 
 	// Module Properties
-	this.title 				= "@MODULE_NAME@";
-	this.author 			= "Ortus Solutions";
-	this.webURL 			= "https://www.ortussolutions.com";
-	this.description 		= "@MODULE_DESCRIPTION@";
-	this.version 			= "@build.version@+@build.number@";
+	this.title       = "cbPayments";
+	this.author      = "Ortus Solutions";
+	this.webURL      = "https://www.ortussolutions.com";
+	this.description = "A module providing a common interface and API for processing payments and subscriptions'";
+	this.version     = "@build.version@+@build.number@";
 
 	// Model Namespace
-	this.modelNamespace		= "@MODULE_SLUG@";
+	this.modelNamespace = "cbpayments";
 
 	// CF Mapping
-	this.cfmapping			= "@MODULE_SLUG@";
+	this.cfmapping = "cbpayments";
 
 	// Dependencies
-	this.dependencies 		= [];
+	this.dependencies = [];
 
 	/**
 	 * Configure Module
 	 */
 	function configure(){
-		settings = {
-
-		};
+		settings = {};
 	}
 
 	/**
 	 * Fired when the module is registered and activated.
 	 */
 	function onLoad(){
-
 	}
 
 	/**
 	 * Fired when the module is unregistered and unloaded
 	 */
 	function onUnload(){
-
 	}
 
 }

@@ -55,30 +55,31 @@ component extends="coldbox.system.testing.BaseTestCase" {
 
 				expect( response.getError() ).toBeFalse();
 				expect( response.getContent().paid ).toBeTrue();
-				expect( response.getContent() ).toBeStruct()
-								.toHaveKey( "id" )
-								.toHaveKey( "object" )
-								.toHaveKey( "amount" )
-								.toHaveKey( "amount_captured" )
-								.toHaveKey( "amount_refunded" )
-								.toHaveKey( "balance_transaction" )
-								.toHaveKey( "billing_details" )
-								.toHaveKey( "processor" )
-								.toHaveKey( "captured" )
-								.toHaveKey( "created" )
-								.toHaveKey( "currency" )
-								.toHaveKey( "disputed" )
-								.toHaveKey( "fraud_details" )
-								.toHaveKey( "livemode" )
-								.toHaveKey( "metadata" )
-								.toHaveKey( "outcome" )
-								.toHaveKey( "paid" )
-								.toHaveKey( "payment_method" )
-								.toHaveKey( "payment_method_details" )
-								.toHaveKey( "receipt_url" )
-								.toHaveKey( "refunded" )
-								.toHaveKey( "status" );
-					variables.testCharge = response.getContent().id;
+				expect( response.getContent() )
+					.toBeStruct()
+					.toHaveKey( "id" )
+					.toHaveKey( "object" )
+					.toHaveKey( "amount" )
+					.toHaveKey( "amount_captured" )
+					.toHaveKey( "amount_refunded" )
+					.toHaveKey( "balance_transaction" )
+					.toHaveKey( "billing_details" )
+					.toHaveKey( "processor" )
+					.toHaveKey( "captured" )
+					.toHaveKey( "created" )
+					.toHaveKey( "currency" )
+					.toHaveKey( "disputed" )
+					.toHaveKey( "fraud_details" )
+					.toHaveKey( "livemode" )
+					.toHaveKey( "metadata" )
+					.toHaveKey( "outcome" )
+					.toHaveKey( "paid" )
+					.toHaveKey( "payment_method" )
+					.toHaveKey( "payment_method_details" )
+					.toHaveKey( "receipt_url" )
+					.toHaveKey( "refunded" )
+					.toHaveKey( "status" );
+				variables.testCharge = response.getContent().id;
 			} );
 
 			it( "can make a test preAuth", function(){
@@ -90,67 +91,71 @@ component extends="coldbox.system.testing.BaseTestCase" {
 
 				expect( response.getError() ).toBeFalse();
 				expect( response.getContent().paid ).toBeTrue();
-				expect( response.getContent() ).toBeStruct()
-								.toHaveKey( "id" )
-								.toHaveKey( "object" )
-								.toHaveKey( "amount" )
-								.toHaveKey( "amount_captured" )
-								.toHaveKey( "amount_refunded" )
-								.toHaveKey( "billing_details" )
-								.toHaveKey( "processor" )
-								.toHaveKey( "captured" )
-								.toHaveKey( "created" )
-								.toHaveKey( "currency" )
-								.toHaveKey( "disputed" )
-								.toHaveKey( "fraud_details" )
-								.toHaveKey( "livemode" )
-								.toHaveKey( "metadata" )
-								.toHaveKey( "outcome" )
-								.toHaveKey( "paid" )
-								.toHaveKey( "payment_method" )
-								.toHaveKey( "payment_method_details" )
-								.toHaveKey( "receipt_url" )
-								.toHaveKey( "refunded" )
-								.toHaveKey( "status" );
-					expect( response.getContent().captured ).toBeFalse();
-					expect( structKeyExists( response.getContent(), "balance_transaction" ) ).toBeFalse();
-					variables.testPreAuth = response.getContent().id;
+				expect( response.getContent() )
+					.toBeStruct()
+					.toHaveKey( "id" )
+					.toHaveKey( "object" )
+					.toHaveKey( "amount" )
+					.toHaveKey( "amount_captured" )
+					.toHaveKey( "amount_refunded" )
+					.toHaveKey( "billing_details" )
+					.toHaveKey( "processor" )
+					.toHaveKey( "captured" )
+					.toHaveKey( "created" )
+					.toHaveKey( "currency" )
+					.toHaveKey( "disputed" )
+					.toHaveKey( "fraud_details" )
+					.toHaveKey( "livemode" )
+					.toHaveKey( "metadata" )
+					.toHaveKey( "outcome" )
+					.toHaveKey( "paid" )
+					.toHaveKey( "payment_method" )
+					.toHaveKey( "payment_method_details" )
+					.toHaveKey( "receipt_url" )
+					.toHaveKey( "refunded" )
+					.toHaveKey( "status" );
+				expect( response.getContent().captured ).toBeFalse();
+				expect( structKeyExists( response.getContent(), "balance_transaction" ) ).toBeFalse();
+				variables.testPreAuth = response.getContent().id;
 			} );
 
 			it( "Can capture a pre-authorization", function(){
-				if( !variables.keyExists( "testPreAuth" ) ){
-					variables.testPreAuth = variables.model.preAuthorize(
-						amount      = 100,
-						source      = "tok_visa",
-						description = "Unit test charge"
-					).getContent().id;
+				if ( !variables.keyExists( "testPreAuth" ) ) {
+					variables.testPreAuth = variables.model
+						.preAuthorize(
+							amount      = 100,
+							source      = "tok_visa",
+							description = "Unit test charge"
+						)
+						.getContent()
+						.id;
 				}
 				var response = variables.model.capture( variables.testPreAuth );
 
-				expect( response.getContent() ).toBeStruct()
-								.toHaveKey( "id" )
-								.toHaveKey( "object" )
-								.toHaveKey( "amount" )
-								.toHaveKey( "amount_captured" )
-								.toHaveKey( "amount_refunded" )
-								.toHaveKey( "balance_transaction" )
-								.toHaveKey( "billing_details" )
-								.toHaveKey( "processor" )
-								.toHaveKey( "captured" )
-								.toHaveKey( "created" )
-								.toHaveKey( "currency" )
-								.toHaveKey( "disputed" )
-								.toHaveKey( "fraud_details" )
-								.toHaveKey( "livemode" )
-								.toHaveKey( "metadata" )
-								.toHaveKey( "outcome" )
-								.toHaveKey( "paid" )
-								.toHaveKey( "payment_method" )
-								.toHaveKey( "payment_method_details" )
-								.toHaveKey( "receipt_url" )
-								.toHaveKey( "refunded" )
-								.toHaveKey( "status" );
-
+				expect( response.getContent() )
+					.toBeStruct()
+					.toHaveKey( "id" )
+					.toHaveKey( "object" )
+					.toHaveKey( "amount" )
+					.toHaveKey( "amount_captured" )
+					.toHaveKey( "amount_refunded" )
+					.toHaveKey( "balance_transaction" )
+					.toHaveKey( "billing_details" )
+					.toHaveKey( "processor" )
+					.toHaveKey( "captured" )
+					.toHaveKey( "created" )
+					.toHaveKey( "currency" )
+					.toHaveKey( "disputed" )
+					.toHaveKey( "fraud_details" )
+					.toHaveKey( "livemode" )
+					.toHaveKey( "metadata" )
+					.toHaveKey( "outcome" )
+					.toHaveKey( "paid" )
+					.toHaveKey( "payment_method" )
+					.toHaveKey( "payment_method_details" )
+					.toHaveKey( "receipt_url" )
+					.toHaveKey( "refunded" )
+					.toHaveKey( "status" );
 			} );
 
 			it( "Will error on a fake refund", function(){

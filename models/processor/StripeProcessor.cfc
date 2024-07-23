@@ -2,8 +2,8 @@
  * A cool processor/Stripe entity
  */
 component
-	extends  ="BaseProcessor"
-	delegates="DateTime@coreDelegates"
+	extends   ="BaseProcessor"
+	delegates ="DateTime@coreDelegates"
 	implements="IPaymentProcessor"
 	singleton
 {
@@ -81,9 +81,7 @@ component
 		var processorResponse = variables.stripe.charges.capture( charge_id = arguments.chargeId );
 
 		// Capture it baby!
-		oResponse.setContent(
-			formatChargeResponse( processorResponse.content )
-		);
+		oResponse.setContent( formatChargeResponse( processorResponse.content ) );
 
 		// Check for errors
 		if ( processorResponse.status >= 300 ) {
@@ -127,9 +125,7 @@ component
 
 		var processorResponse = variables.stripe.charges.create( argumentCollection = arguments );
 		// Charge it baby!
-		oResponse.setContent(
-			formatChargeResponse( processorResponse.content )
-		);
+		oResponse.setContent( formatChargeResponse( processorResponse.content ) );
 
 		// Check for errors
 		if ( processorResponse.status >= 300 ) {
@@ -145,6 +141,7 @@ component
 
 	/**
 	 * Make a refund on the processor
+	 *
 	 * @charge   The identifier of the charge to refund.
 	 * @amount   The amount in cents to refund, if not sent then the entire charge is refunded (Optional)
 	 * @reason   A reason of why the refund (Optional)
@@ -214,9 +211,7 @@ component
 		);
 
 		// Create customer
-		oResponse.setContent(
-			processorResponse.content
-		);
+		oResponse.setContent( processorResponse.content );
 
 		// Check for errors
 		if ( processorResponse.status >= 300 ) {
@@ -250,7 +245,10 @@ component
 			log.debug( "Stripe list customers starting: #serializeJSON( arguments )#" );
 		}
 
-		var processorResponse = variables.stripe.customers.list( limit = arguments.limit, offset = arguments.offset );
+		var processorResponse = variables.stripe.customers.list(
+			limit  = arguments.limit,
+			offset = arguments.offset
+		);
 
 		// List customers
 		oResponse.setContent( processorResponse.content );
@@ -362,11 +360,12 @@ component
 	ProcessorResponse function cancelSubscription( required subscriptionId, struct metadata = {} ){
 		var oResponse = newResponse();
 
-		var processorResponse = variables.stripe.subscriptions.update( arguments.subscriptionId, { cancel_at_period_end : true } );
-		// Associate payment method as default
-		oResponse.setContent(
-			processorResponse.content
+		var processorResponse = variables.stripe.subscriptions.update(
+			arguments.subscriptionId,
+			{ cancel_at_period_end : true }
 		);
+		// Associate payment method as default
+		oResponse.setContent( processorResponse.content );
 
 		// Check for errors
 		if ( processorResponse.status >= 300 ) {
@@ -387,7 +386,10 @@ component
 	ProcessorResponse function resumeSubscription( required subscriptionId, struct metadata = {} ){
 		var oResponse = newResponse();
 
-		var processorResponse = variables.stripe.subscriptions.update( arguments.subscriptionId, { cancel_at_period_end : false } );
+		var processorResponse = variables.stripe.subscriptions.update(
+			arguments.subscriptionId,
+			{ cancel_at_period_end : false }
+		);
 
 		// Associate payment method as default
 		oResponse.setContent( processorResponse.content );
@@ -417,12 +419,13 @@ component
 	){
 		var oResponse = newResponse();
 
-		var processorResponse = variables.stripe.subscriptions.update( arguments.subscriptionId, { quantity : arguments.quantity } );
+		var processorResponse = variables.stripe.subscriptions.update(
+			arguments.subscriptionId,
+			{ quantity : arguments.quantity }
+		);
 
 		// Associate payment method as default
-		oResponse.setContent(
-			processorResponse.content
-		);
+		oResponse.setContent( processorResponse.content );
 
 		// Check for errors
 		if ( processorResponse.status >= 300 ) {
@@ -575,7 +578,7 @@ component
 			{ customer : arguments.providerCustomerId }
 		).content;
 
-		var processorResponse =  variables.stripe.customers.update(
+		var processorResponse = variables.stripe.customers.update(
 			arguments.providerCustomerId,
 			{ invoice_settings : { default_payment_method : paymentMethod.id } }
 		);
@@ -651,7 +654,13 @@ component
 	 * @epochSeconds
 	 */
 	string function fromUnixSeconds( required numeric epochSeconds ){
-		return getISOTime( dateAdd( "s", arguments.epochSeconds, "1970-01-01T00:00:00Z" ) );
+		return getISOTime(
+			dateAdd(
+				"s",
+				arguments.epochSeconds,
+				"1970-01-01T00:00:00Z"
+			)
+		);
 	}
 
 	/**

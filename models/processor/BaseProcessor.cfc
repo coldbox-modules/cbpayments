@@ -10,7 +10,8 @@ component accessors="true" {
 	/**
 	 * Get a new reponse object
 	 */
-	function newResponse() provider="ProcessorResponse@cbpayments"{}
+	function newResponse() provider="ProcessorResponse@cbpayments"{
+	}
 
 	/**
 	 * Retrieve a human readable name for the processor

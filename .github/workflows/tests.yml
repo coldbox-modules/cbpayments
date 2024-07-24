@@ -9,10 +9,6 @@ on:
       SLACK_WEBHOOK_URL:
         required: false
 
-permissions:
-  checks: write
-  pull-requests: write
-
 jobs:
   tests:
     name: Tests

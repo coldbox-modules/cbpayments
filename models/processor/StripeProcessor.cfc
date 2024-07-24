@@ -307,20 +307,20 @@ component
 	 * Make a charge on the processor
 	 * TODO: Add this to the interface
 	 *
-	 * @amount The amount in cents to charge, example: $20 = 2000, $20.5 = 2050, it is required
-	 * @currency Usually the three-letter ISO Currency code (Optional)
-	 * @customerId A customer identifier to attach to the charge (Optional)
+	 * @amount      The amount in cents to charge, example: $20 = 2000, $20.5 = 2050, it is required
+	 * @currency    Usually the three-letter ISO Currency code (Optional)
+	 * @customerId  A customer identifier to attach to the charge (Optional)
 	 * @description The description of the charge (Optional)
 	 */
 	ProcessorResponse function createSetupIntent(
 		required string customer,
-		string description = "",
-		string currency = "usd",
-		string usage = "off_session",
+		string description     = "",
+		string currency        = "usd",
+		string usage           = "off_session",
 		boolean attach_to_self = false,
 		string flow_directions = "inbound",
-		struct metadata = {}
-	) {
+		struct metadata        = {}
+	){
 		var oResponse = newResponse();
 
 		if ( log.canDebug() ) {
@@ -344,16 +344,15 @@ component
 	}
 
 	ProcessorResponse function getSetupIntent( required intentId ){
-
 	}
 
 	/**
 	 * Make a charge on the processor
 	 * TODO: Add this to the interface
 	 *
-	 * @amount The amount in cents to charge, example: $20 = 2000, $20.5 = 2050, it is required
-	 * @currency Usually the three-letter ISO Currency code (Optional)
-	 * @customerId A customer identifier to attach to the charge (Optional)
+	 * @amount      The amount in cents to charge, example: $20 = 2000, $20.5 = 2050, it is required
+	 * @currency    Usually the three-letter ISO Currency code (Optional)
+	 * @customerId  A customer identifier to attach to the charge (Optional)
 	 * @description The description of the charge (Optional)
 	 */
 	ProcessorResponse function createPaymentIntent(
@@ -361,9 +360,9 @@ component
 		required string customer,
 		required string payment_method,
 		string description = "",
-		string currency = "usd",
-		struct metadata = {}
-	) {
+		string currency    = "usd",
+		struct metadata    = {}
+	){
 		var oResponse = newResponse();
 
 		if ( log.canDebug() ) {
@@ -392,12 +391,11 @@ component
 	 * Retrieve the payment intent status
 	 *
 	 * @providerCustomerId
-	 * @planId
-	 * @quantity
-	 * @metadata
+	 * @planId            
+	 * @quantity          
+	 * @metadata          
 	 */
-	public string function fetchPaymentIntentStatus( required string paymentIntentId ) {
-
+	public string function fetchPaymentIntentStatus( required string paymentIntentId ){
 		var oResponse = newResponse();
 
 		if ( log.canDebug() ) {
@@ -601,7 +599,9 @@ component
 		var oResponse    = newResponse();
 
 		if ( log.canDebug() ) {
-			log.debug( "Stripe get provider customer by subscription id method starting: #serializeJSON( arguments )#" );
+			log.debug(
+				"Stripe get provider customer by subscription id method starting: #serializeJSON( arguments )#"
+			);
 		}
 
 		oResponse.setContent( {} );
@@ -624,7 +624,9 @@ component
 		oResponse.setContent( customer.getContent().content );
 
 		if ( log.canDebug() ) {
-			log.debug( "Stripe get provider customer by subscription id method response: #serializeJSON( oResponse.getContent() )#" );
+			log.debug(
+				"Stripe get provider customer by subscription id method response: #serializeJSON( oResponse.getContent() )#"
+			);
 		}
 
 		return oResponse;
@@ -772,10 +774,10 @@ component
 	 *
 	 * @code The promotion code to validate
 	 */
-	ProcessorResponse function validatePromotionCode( required code ) {
+	ProcessorResponse function validatePromotionCode( required code ){
 		var oResponse = newResponse();
 
-		var promotionCodes = variables.stripe.promotionCodes.list( { code: code, active: true, limit: 1 } ).content;
+		var promotionCodes = variables.stripe.promotionCodes.list( { code : code, active : true, limit : 1 } ).content;
 
 		if ( promotionCodes.data.len() <= 0 ) {
 			oResponse.setError( true );

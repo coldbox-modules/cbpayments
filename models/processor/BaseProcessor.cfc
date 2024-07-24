@@ -98,12 +98,12 @@ component accessors="true" {
 		throw( "This method must be implemented in the child processor" );
 	}
 
-		/**
+	/**
 	 * Create a payment intent which can be used for recurring billing
 	 *
-	 * @amount The amount in cents to charge, example: $20 = 2000, $20.5 = 2050, it is required
-	 * @currency Usually the three-letter ISO Currency code (Optional)
-	 * @customerId A customer identifier to attach to the charge (Optional)
+	 * @amount      The amount in cents to charge, example: $20 = 2000, $20.5 = 2050, it is required
+	 * @currency    Usually the three-letter ISO Currency code (Optional)
+	 * @customerId  A customer identifier to attach to the charge (Optional)
 	 * @description The description of the charge (Optional)
 	 */
 	ProcessorResponse function createPaymentIntent(
@@ -111,8 +111,8 @@ component accessors="true" {
 		required string customer,
 		required string payment_method,
 		string description = "",
-		string currency = "usd",
-		struct metadata = {}
+		string currency    = "usd",
+		struct metadata    = {}
 	){
 		throw( "This method must be implemented in the child processor" );
 	}

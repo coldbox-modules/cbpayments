@@ -19,6 +19,7 @@ on:
 permissions:
   checks: write
   pull-requests: write
+  contents: write
 
 env:
   MODULE_ID: cbpayments

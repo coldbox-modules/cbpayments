@@ -302,6 +302,125 @@ component
 		return oResponse;
 	}
 
+
+	/**
+	 * Make a charge on the processor
+	 * TODO: Add this to the interface
+	 *
+	 * @amount The amount in cents to charge, example: $20 = 2000, $20.5 = 2050, it is required
+	 * @currency Usually the three-letter ISO Currency code (Optional)
+	 * @customerId A customer identifier to attach to the charge (Optional)
+	 * @description The description of the charge (Optional)
+	 */
+	ProcessorResponse function createSetupIntent(
+		required string customer,
+		string description = "",
+		string currency = "usd",
+		string usage = "off_session",
+		boolean attach_to_self = false,
+		string flow_directions = "inbound",
+		struct metadata = {}
+	) {
+		var oResponse = newResponse();
+
+		if ( log.canDebug() ) {
+			log.debug( "Stripe setup intent creation request: #serializeJSON( arguments )#" );
+		}
+
+		var processorResponse = variables.stripe.setupIntents.create( argumentCollection = arguments );
+
+		oResponse.setContent( processorResponse.content );
+
+		// Check for errors
+		if ( processorResponse.status >= 300 ) {
+			oResponse.setError( true );
+		}
+
+		if ( log.canDebug() ) {
+			log.debug( "Stripe setup intent creation response: #serializeJSON( oResponse.getContent() )#" );
+		}
+
+		return oResponse;
+	}
+
+	ProcessorResponse function getSetupIntent( required intentId ){
+
+	}
+
+	/**
+	 * Make a charge on the processor
+	 * TODO: Add this to the interface
+	 *
+	 * @amount The amount in cents to charge, example: $20 = 2000, $20.5 = 2050, it is required
+	 * @currency Usually the three-letter ISO Currency code (Optional)
+	 * @customerId A customer identifier to attach to the charge (Optional)
+	 * @description The description of the charge (Optional)
+	 */
+	ProcessorResponse function createPaymentIntent(
+		required numeric amount,
+		required string customer,
+		required string payment_method,
+		string description = "",
+		string currency = "usd",
+		struct metadata = {}
+	) {
+		var oResponse = newResponse();
+
+		if ( log.canDebug() ) {
+			log.debug( "Stripe payment intent creation request: #serializeJSON( arguments )#" );
+		}
+
+		var processorResponse = variables.stripe.paymentIntents.create( argumentCollection = arguments );
+
+		oResponse.setContent( processorResponse.content );
+
+		// Check for errors
+		if ( processorResponse.status >= 300 ) {
+			oResponse.setError( true );
+		}
+
+		if ( log.canDebug() ) {
+			log.debug( "Stripe payment intent creation response: #serializeJSON( oResponse.getContent() )#" );
+		}
+
+		return oResponse;
+	}
+
+
+
+	/**
+	 * Retrieve the payment intent status
+	 *
+	 * @providerCustomerId
+	 * @planId
+	 * @quantity
+	 * @metadata
+	 */
+	public string function fetchPaymentIntentStatus( required string paymentIntentId ) {
+
+		var oResponse = newResponse();
+
+		if ( log.canDebug() ) {
+			log.debug( "Stripe payment intent status request: #serializeJSON( arguments )#" );
+		}
+
+		var processorResponse = variables.stripe.paymentIntents.retrieve( arguments.paymentIntentId );
+
+		oResponse.setContent( processorResponse.content );
+
+		// Check for errors
+		if ( processorResponse.status >= 300 ) {
+			oResponse.setError( true );
+		}
+
+		if ( log.canDebug() ) {
+			log.debug( "Stripe payment intent status response: #serializeJSON( oResponse.getContent() )#" );
+		}
+
+		return oResponse;
+	}
+
+
 	/**
 	 * Create a subscription, combine a plan with a customer
 	 *
@@ -645,6 +764,26 @@ component
 			log.debug( "Stripe  Change Subscription Plan response: #serializeJSON( oResponse.getContent() )#" );
 		}
 
+		return oResponse;
+	}
+
+	/**
+	 * Validate a promotion code
+	 *
+	 * @code The promotion code to validate
+	 */
+	ProcessorResponse function validatePromotionCode( required code ) {
+		var oResponse = newResponse();
+
+		var promotionCodes = variables.stripe.promotionCodes.list( { code: code, active: true, limit: 1 } ).content;
+
+		if ( promotionCodes.data.len() <= 0 ) {
+			oResponse.setError( true );
+			oResponse.setContent( "Not promotion code found for [#code#]." );
+			return oResponse;
+		}
+
+		oResponse.setContent( promotionCodes.data[ 1 ] );
 		return oResponse;
 	}
 
